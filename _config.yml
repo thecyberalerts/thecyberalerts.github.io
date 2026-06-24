@@ -1,0 +1,25 @@
+title: The Cyber Alerts
+description: "Cybersecurity insights, threat analysis, and digital security best practices"
+author: "The Cyber Alerts Team"
+email: "contact@thecyberalerts.com"
+baseurl: ""
+url: "https://thecyberalerts.github.io"
+
+# Jekyll configuration
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Custom settings
+show_excerpts: true
+paginate: 10
+
+# Social media
+github_username: thecyberalerts
+twitter_username: thecyberalerts
+
+# Colors for cybersecurity theme
+sass:
+  style: compressed
