@@ -28,9 +28,6 @@ layout: default
                     <a href="/" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/categories/" class="nav-link">Categories</a>
-                </li>
-                <li class="nav-item">
                     <a href="/about/" class="nav-link">About</a>
                 </li>
                 <li class="nav-item">
@@ -105,18 +102,6 @@ layout: default
 
         <!-- Sidebar -->
         <aside class="sidebar">
-            <!-- Categories Widget -->
-            <div class="widget">
-                <h3 class="widget-title">Categories</h3>
-                <ul class="category-list">
-                    <li><a href="/categories/cybersecurity/">🔐 Cybersecurity</a></li>
-                    <li><a href="/categories/threat-analysis/">🚨 Threat Analysis</a></li>
-                    <li><a href="/categories/vulnerability/">⚠️ Vulnerability</a></li>
-                    <li><a href="/categories/incident-response/">🔍 Incident Response</a></li>
-                    <li><a href="/categories/best-practices/">✅ Best Practices</a></li>
-                </ul>
-            </div>
-
             <!-- Recent Posts Widget -->
             <div class="widget">
                 <h3 class="widget-title">Recent Posts</h3>
@@ -144,8 +129,8 @@ layout: default
             <div class="widget">
                 <h3 class="widget-title">⭐ Featured</h3>
                 <ul class="featured-list">
-                    <li><a href="/posts/fortigate-credential-compromise-analysis/">FortiGate Credential Compromise</a></li>
-                    <li><a href="/posts/welcome-to-cybersecurity-blog/">Welcome to The Cyber Alerts</a></li>
+                    <li><a href="{{ site.posts[1].url }}">{{ site.posts[1].title }}</a></li>
+                    <li><a href="{{ site.posts[0].url }}">{{ site.posts[0].title }}</a></li>
                 </ul>
             </div>
         </aside>
