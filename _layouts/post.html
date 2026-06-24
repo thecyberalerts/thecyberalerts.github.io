@@ -1,0 +1,350 @@
+---
+layout: post
+---
+
+<div class="post-container">
+    <article class="post-full">
+        <header class="post-header">
+            <h1 class="post-title">{{ page.title }}</h1>
+            <div class="post-meta">
+                <span class="meta-item">📅 {{ page.date | date: "%B %d, %Y" }}</span>
+                <span class="meta-item">✍️ {{ page.author }}</span>
+                <span class="meta-item">⏱️ {% assign words = content | strip_html | split: " " %}{{ words | size | times: 0.2 | ceil }} min read</span>
+            </div>
+            
+            <div class="post-categories">
+                {% for category in page.categories %}
+                <span class="category-badge">{{ category }}</span>
+                {% endfor %}
+            </div>
+        </header>
+
+        <div class="post-content">
+            {{ content }}
+        </div>
+
+        <footer class="post-footer">
+            <div class="post-tags">
+                <strong>Tags:</strong>
+                {% for tag in page.tags %}
+                <a href="/tags/{{ tag | slugify }}/" class="tag">{{ tag }}</a>
+                {% endfor %}
+            </div>
+            
+            <div class="post-share">
+                <strong>Share:</strong>
+                <a href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ site.url }}{{ page.url }}" class="share-link twitter" target="_blank">Twitter</a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url }}" class="share-link facebook" target="_blank">Facebook</a>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ page.url }}" class="share-link linkedin" target="_blank">LinkedIn</a>
+            </div>
+        </footer>
+    </article>
+
+    <!-- Related Posts -->
+    <section class="related-posts">
+        <h3>Related Articles</h3>
+        <div class="related-posts-grid">
+            {% for post in site.posts limit:3 %}
+                {% unless post.url == page.url %}
+                <div class="related-post-card">
+                    <h4><a href="{{ post.url }}">{{ post.title }}</a></h4>
+                    <p class="post-date">{{ post.date | date: "%B %d, %Y" }}</p>
+                </div>
+                {% endunless %}
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Comments Section -->
+    <section class="comments-section">
+        <h3>Comments</h3>
+        <div id="disqus_thread"></div>
+        
+        <div class="comments-placeholder">
+            <p>💬 Comments section powered by Disqus</p>
+            <p>Enable comments by adding Disqus shortname to _config.yml</p>
+        </div>
+    </section>
+
+    <!-- Author Bio -->
+    <section class="author-bio">
+        <div class="author-content">
+            <h4>About the Author</h4>
+            <p>{{ page.author }} is a cybersecurity professional dedicated to providing in-depth threat analysis and security insights to help organizations protect their digital assets.</p>
+        </div>
+    </section>
+
+    <!-- Navigation -->
+    <div class="post-navigation">
+        {% if page.previous %}
+        <a href="{{ page.previous.url }}" class="nav-prev">
+            ← {{ page.previous.title }}
+        </a>
+        {% endif %}
+        
+        {% if page.next %}
+        <a href="{{ page.next.url }}" class="nav-next">
+            {{ page.next.title }} →
+        </a>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+.post-container {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+.post-header {
+    border-bottom: 2px solid #00d4ff;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+}
+
+.post-title {
+    color: #00d4ff;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.post-meta {
+    color: #888;
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+}
+
+.post-categories {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.post-content {
+    color: #d0d0d0;
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.post-content h2 {
+    color: #00d4ff;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.post-content h3 {
+    color: #8338ec;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.post-content code {
+    background: #0f1423;
+    color: #06ffa5;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.post-content pre {
+    background: #0f1423;
+    color: #06ffa5;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    border-left: 4px solid #8338ec;
+    margin: 1rem 0;
+}
+
+.post-content blockquote {
+    border-left: 4px solid #00d4ff;
+    padding-left: 1rem;
+    margin-left: 0;
+    color: #aaa;
+}
+
+.post-footer {
+    border-top: 2px solid #00d4ff;
+    padding-top: 2rem;
+    margin-top: 2rem;
+}
+
+.post-tags {
+    margin-bottom: 1.5rem;
+}
+
+.tag {
+    display: inline-block;
+    background: #8338ec;
+    color: #f0f0f0;
+    padding: 0.4rem 0.8rem;
+    margin-right: 0.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.tag:hover {
+    background: #00d4ff;
+    color: #0a0e27;
+}
+
+.post-share {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.share-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.share-link:hover {
+    background: #00d4ff;
+    color: #0a0e27;
+}
+
+.related-posts {
+    background: #1a1f3a;
+    border-left: 4px solid #00d4ff;
+    padding: 2rem;
+    margin: 3rem 0;
+    border-radius: 4px;
+}
+
+.related-posts h3 {
+    color: #00d4ff;
+    margin-top: 0;
+}
+
+.related-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.related-post-card {
+    background: #0f1423;
+    padding: 1rem;
+    border-radius: 4px;
+    border-left: 3px solid #8338ec;
+}
+
+.related-post-card h4 {
+    margin: 0 0 0.5rem 0;
+    color: #00d4ff;
+}
+
+.related-post-card h4 a {
+    color: #00d4ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.related-post-card h4 a:hover {
+    color: #ff006e;
+}
+
+.related-post-card .post-date {
+    color: #666;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.comments-section {
+    background: #1a1f3a;
+    border-left: 4px solid #00d4ff;
+    padding: 2rem;
+    margin: 3rem 0;
+    border-radius: 4px;
+}
+
+.comments-section h3 {
+    color: #00d4ff;
+    margin-top: 0;
+}
+
+.comments-placeholder {
+    background: #0f1423;
+    padding: 2rem;
+    border-radius: 4px;
+    text-align: center;
+    color: #888;
+}
+
+.author-bio {
+    background: linear-gradient(135deg, #8338ec 0%, #0a0e27 100%);
+    border-left: 4px solid #00d4ff;
+    padding: 2rem;
+    margin: 3rem 0;
+    border-radius: 4px;
+}
+
+.author-bio h4 {
+    color: #00d4ff;
+    margin-top: 0;
+}
+
+.author-bio p {
+    color: #d0d0d0;
+}
+
+.post-navigation {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.nav-prev,
+.nav-next {
+    display: block;
+    padding: 1rem;
+    background: #1a1f3a;
+    border-left: 4px solid #00d4ff;
+    color: #00d4ff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.nav-prev:hover,
+.nav-next:hover {
+    background: #2a2f4a;
+    border-left-color: #ff006e;
+}
+
+@media (max-width: 768px) {
+    .post-title {
+        font-size: 1.8rem;
+    }
+
+    .post-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .post-content {
+        font-size: 1rem;
+    }
+
+    .post-navigation {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
