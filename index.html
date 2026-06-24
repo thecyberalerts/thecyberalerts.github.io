@@ -1,0 +1,190 @@
+---
+layout: default
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Cyber Alerts - Cybersecurity insights, threat analysis, and digital security best practices">
+    <meta name="keywords" content="cybersecurity, threat intelligence, security analysis, vulnerability">
+    <title>The Cyber Alerts - Cybersecurity Blog</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/navbar.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/">
+                    <span class="logo-icon">🛡️</span>
+                    <span class="logo-text">The Cyber Alerts</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/categories/" class="nav-link">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/about/" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/contact/" class="nav-link">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header Banner -->
+    <header class="header-banner">
+        <div class="header-content">
+            <h1>The Cyber Alerts</h1>
+            <p>Your Trusted Source for Cybersecurity Insights & Threat Intelligence</p>
+            <form class="search-bar" action="/search/" method="get">
+                <input type="text" name="q" placeholder="Search articles...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Latest Posts -->
+            <section class="posts-section">
+                <h2 class="section-title">Latest Articles</h2>
+                
+                {% for post in site.posts limit:6 %}
+                <article class="post-card">
+                    <div class="post-header">
+                        <h3 class="post-title">
+                            <a href="{{ post.url }}">{{ post.title }}</a>
+                        </h3>
+                        <div class="post-meta">
+                            <span class="post-date">📅 {{ post.date | date: "%B %d, %Y" }}</span>
+                            <span class="post-author">✍️ {{ post.author }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="post-excerpt">
+                        {{ post.excerpt | strip_html | truncate: 250 }}
+                    </div>
+                    
+                    <div class="post-footer">
+                        <div class="post-categories">
+                            {% for category in post.categories %}
+                            <span class="category-badge">{{ category }}</span>
+                            {% endfor %}
+                        </div>
+                        <a href="{{ post.url }}" class="read-more">Read More →</a>
+                    </div>
+                </article>
+                {% endfor %}
+            </section>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                {% if paginator.previous_page %}
+                <a href="{{ paginator.previous_page_path }}" class="pagination-link">← Previous</a>
+                {% endif %}
+                
+                <span class="pagination-info">
+                    Page {{ paginator.page }} of {{ paginator.total_pages }}
+                </span>
+                
+                {% if paginator.next_page %}
+                <a href="{{ paginator.next_page_path }}" class="pagination-link">Next →</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Categories Widget -->
+            <div class="widget">
+                <h3 class="widget-title">Categories</h3>
+                <ul class="category-list">
+                    <li><a href="/categories/cybersecurity/">🔐 Cybersecurity</a></li>
+                    <li><a href="/categories/threat-analysis/">🚨 Threat Analysis</a></li>
+                    <li><a href="/categories/vulnerability/">⚠️ Vulnerability</a></li>
+                    <li><a href="/categories/incident-response/">🔍 Incident Response</a></li>
+                    <li><a href="/categories/best-practices/">✅ Best Practices</a></li>
+                </ul>
+            </div>
+
+            <!-- Recent Posts Widget -->
+            <div class="widget">
+                <h3 class="widget-title">Recent Posts</h3>
+                <ul class="recent-posts">
+                    {% for post in site.posts limit:5 %}
+                    <li>
+                        <a href="{{ post.url }}">{{ post.title }}</a>
+                        <span class="post-date-small">{{ post.date | date: "%b %d" }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Newsletter Widget -->
+            <div class="widget newsletter-widget">
+                <h3 class="widget-title">Newsletter</h3>
+                <p>Subscribe to our newsletter for latest cybersecurity updates.</p>
+                <form action="#" method="post" class="newsletter-form">
+                    <input type="email" placeholder="Your email..." required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+
+            <!-- Featured Articles -->
+            <div class="widget">
+                <h3 class="widget-title">⭐ Featured</h3>
+                <ul class="featured-list">
+                    <li><a href="/posts/fortigate-credential-compromise-analysis/">FortiGate Credential Compromise</a></li>
+                    <li><a href="/posts/welcome-to-cybersecurity-blog/">Welcome to The Cyber Alerts</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About Us</h4>
+                <p>The Cyber Alerts provides in-depth cybersecurity analysis, threat intelligence, and security best practices for organizations and professionals.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                    <li><a href="/privacy/">Privacy Policy</a></li>
+                    <li><a href="/disclaimer/">Disclaimer</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <ul class="social-links">
+                    <li><a href="https://github.com/thecyberalerts" target="_blank">GitHub</a></li>
+                    <li><a href="https://twitter.com/thecyberalerts" target="_blank">Twitter</a></li>
+                    <li><a href="mailto:contact@thecyberalerts.com">Email</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 The Cyber Alerts. All rights reserved.</p>
+            <p>Stay Secure. Stay Informed. Stay Ahead of Threats. 🛡️</p>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>
